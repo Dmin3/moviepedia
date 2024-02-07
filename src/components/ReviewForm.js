@@ -23,10 +23,15 @@ function ReviewForm() {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
   return (
     <>
       <h2>리뷰 작성</h2>
-      <form className="ReviewForm">
+      <form onSubmit={handleSubmit} className="ReviewForm">
         <Rating value={values.rating} onHover={handleChange}></Rating>
         <FileInput value={values.imgUrl} onChange={handleChange}></FileInput>
         <input
@@ -44,6 +49,7 @@ function ReviewForm() {
           value={values.content}
           onChange={handleInputChange}
         ></textarea>
+        <button type="submit">리뷰 작성 완료</button>
       </form>
     </>
   );

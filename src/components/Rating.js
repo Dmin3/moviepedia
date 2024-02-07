@@ -5,11 +5,10 @@ const RATING = [1, 2, 3, 4, 5];
 function Star({ selected, onHover, rating }) {
   const className = `Rating-star ${selected ? "selected" : undefined}`;
 
+  const handleMouseOver = onHover ? () => onHover("rating", rating) : undefined;
+
   return (
-    <span
-      onMouseOver={onHover && onHover("rating", rating)}
-      className={className}
-    >
+    <span onMouseOver={handleMouseOver} className={className}>
       ★
     </span>
   );
