@@ -1,4 +1,4 @@
-export async function getReviews({ order = "createdAt", limit, offset }) {
+export async function getReviews({ order = "createdAt", limit, offset = 0 }) {
   const query = `order=${order}&offset=${offset}&limit=${limit}`;
 
   const response = await fetch(

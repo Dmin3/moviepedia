@@ -1,3 +1,4 @@
+import Rating from "./Rating";
 import "./ReviewList.css";
 
 function formatDate(value) {
@@ -15,7 +16,7 @@ function ReviewListItem({ item }) {
       ></img>
       <div>
         <h1>{item.title}</h1>
-        <p>{item.rating}</p>
+        <Rating value={item.rating}></Rating>
         <p>{formatDate(item.createdAt)}</p>
         <p>{item.content}</p>
       </div>
