@@ -7,7 +7,7 @@ function formatDate(value) {
   return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
 }
 
-function ReviewListItem({ item }) {
+function ReviewListItem({ item, onDelete }) {
   const navigate = useNavigate();
 
   const handleUpdate = (e) => {
@@ -36,19 +36,19 @@ function ReviewListItem({ item }) {
         <p>{formatDate(item.createdAt)}</p>
         <p>{item.content}</p>
         <button onClick={handleUpdate}>수정</button>
-        <button>삭제</button>
+        <button onClick={() => onDelete(item.id)}>삭제</button>
       </div>
     </div>
   );
 }
 
-function ReviewList({ items }) {
+function ReviewList({ items, onDelete }) {
   return (
     <ul>
       {items.map((item) => {
         return (
           <li key={item.id}>
-            <ReviewListItem item={item}></ReviewListItem>
+            <ReviewListItem onDelete={onDelete} item={item}></ReviewListItem>
           </li>
         );
       })}

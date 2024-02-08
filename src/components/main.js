@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getReviews } from "../api.js";
+import { getReviews, deleteReview } from "../api.js";
 import ReviewList from "./ReviewList.js";
 import { Link } from "react-router-dom";
 
@@ -32,6 +32,15 @@ function Main() {
     await loadReviews({ order, offset, limit: LIMIT });
   };
 
+  // 삭제
+  const handleDelete = async (id) => {
+    const result = await deleteReview(id);
+
+    if (!result) return;
+
+    setItem((prevItems) => prevItems.filter((items) => items.id !== id));
+  };
+
   useEffect(() => {
     loadReviews({ order, offset: 0, limit: LIMIT });
   }, [order]);
@@ -43,7 +52,7 @@ function Main() {
         <button onClick={handleBestRating}>베스트순</button>
         <Link to="/review">리뷰 작성하기</Link>
       </div>
-      <ReviewList items={sortedItems}></ReviewList>
+      <ReviewList onDelete={handleDelete} items={sortedItems}></ReviewList>
       {hasNext && <button onClick={loadMoreReviews}>더 보기</button>}
     </div>
   );

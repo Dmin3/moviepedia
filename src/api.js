@@ -46,3 +46,20 @@ export async function updateReview(id, formdata) {
 
   return body;
 }
+
+export async function deleteReview(id) {
+  const response = await fetch(
+    `https://learn.codeit.kr/5833/film-reviews/${id}}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("리뷰를 작성하는데 실패하였습니다.");
+  }
+
+  const body = response.json();
+
+  return body;
+}
