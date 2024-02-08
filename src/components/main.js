@@ -34,11 +34,15 @@ function Main() {
 
   // 삭제
   const handleDelete = async (id) => {
-    const result = await deleteReview(id);
+    const isConfirm = window.confirm("정말 삭제하시겠습니까?");
 
-    if (!result) return;
-
-    setItem((prevItems) => prevItems.filter((items) => items.id !== id));
+    if (isConfirm === true) {
+      const result = await deleteReview(id);
+      if (!result) return;
+      setItem((prevItems) => prevItems.filter((items) => items.id !== id));
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
