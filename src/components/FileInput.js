@@ -37,7 +37,8 @@ function FileInput({ value, onChange }) {
     <div>
       <img width={400} height={300} src={preview} alt="미리보기"></img>
       <input
-        name="imgUrl"
+        accept="image/png, image/jpeg"
+        name="imgFile"
         type="file"
         onChange={handleChange}
         ref={inputRef}

@@ -7,7 +7,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main></Main>} />
-        <Route path="/review" element={<ReviewForm></ReviewForm>} />
+        <Route
+          path="/review"
+          element={<ReviewForm name="create">리뷰작성</ReviewForm>}
+        />
+        <Route
+          path="/update"
+          element={<ReviewForm name="update">리뷰수정</ReviewForm>}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

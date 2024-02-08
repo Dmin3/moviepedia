@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Rating from "./Rating";
 import "./ReviewList.css";
 
@@ -7,6 +8,20 @@ function formatDate(value) {
 }
 
 function ReviewListItem({ item }) {
+  const navigate = useNavigate();
+
+  const handleUpdate = (e) => {
+    navigate("/update", {
+      state: {
+        title: `${item.title}`,
+        content: `${item.content}`,
+        rating: `${item.rating}`,
+        createdAt: `${item.createdAt}`,
+        imgFile: `${item.imgUrl}`,
+      },
+    });
+  };
+
   return (
     <div className="ReviewListItem">
       <img
@@ -19,6 +34,8 @@ function ReviewListItem({ item }) {
         <Rating value={item.rating}></Rating>
         <p>{formatDate(item.createdAt)}</p>
         <p>{item.content}</p>
+        <button onClick={handleUpdate}>수정</button>
+        <button>삭제</button>
       </div>
     </div>
   );
