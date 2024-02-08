@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ReviewForm.css";
 import FileInput from "./FileInput";
 import Rating from "./Rating";
-import { createReviews } from "../api";
+import { createReviews, updateReview } from "../api";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const INITLAL_VALUES = {
@@ -12,8 +12,10 @@ const INITLAL_VALUES = {
   imgFile: null,
 };
 
-function ReviewForm({ children }) {
+function ReviewForm({ name, children }) {
   const location = useLocation();
+
+  // 수정데이터 생성데이터 판단하여 useState 초기값 설정
   const [values, setValues] = useState(
     location.state === null ? INITLAL_VALUES : { ...location.state }
   );
@@ -43,7 +45,9 @@ function ReviewForm({ children }) {
 
     try {
       setIsSubmiting(true);
-      await createReviews(formdata);
+      name === "create"
+        ? await createReviews(formdata)
+        : await updateReview(location.state.id, formdata);
     } catch (err) {
       setIsError(err);
       return;
@@ -76,9 +80,15 @@ function ReviewForm({ children }) {
           value={values.content}
           onChange={handleInputChange}
         ></textarea>
-        <button disabled={isSubmiting} type="submit">
-          리뷰 작성 완료
-        </button>
+        {name === "create" ? (
+          <button disabled={isSubmiting} type="submit">
+            리뷰 작성 완료
+          </button>
+        ) : (
+          <button disabled={isSubmiting} type="submit">
+            수정 완료
+          </button>
+        )}
       </form>
       {isError && <div>{isError.message}</div>}
     </>

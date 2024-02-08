@@ -13,6 +13,7 @@ function ReviewListItem({ item }) {
   const handleUpdate = (e) => {
     navigate("/update", {
       state: {
+        id: `${item.id}}`,
         title: `${item.title}`,
         content: `${item.content}`,
         rating: `${item.rating}`,

@@ -21,14 +21,20 @@ function FileInput({ value, onChange }) {
 
   useEffect(() => {
     console.log("Mount");
-    if (!value) return;
-    const nextPreview = URL.createObjectURL(value);
+    let nextPreview;
+
+    if (value instanceof Blob || value instanceof File) {
+      nextPreview = URL.createObjectURL(value);
+    } else {
+      nextPreview = value;
+    }
+
     setPreview(nextPreview);
 
     return () => {
       console.log("unMount!!");
       setPreview();
-      URL.revokeObjectURL(nextPreview);
+      URL.revokeObjectURL(value);
     };
   }, [value]);
 
